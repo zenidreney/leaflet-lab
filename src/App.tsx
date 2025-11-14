@@ -1,12 +1,15 @@
+import InputInterface from "./components/InputInterface"
+import { LocationContextProvider } from "./context/LocationContext"
 
 function App() {
 
   return (
     <>
-    
-        <p>
-          I am App
-        </p>
+    <LocationContextProvider>
+
+       <InputInterface />
+
+    </LocationContextProvider>
     
     </>
   )
