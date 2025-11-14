@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Stack from 'react-bootstrap/Stack';
 
 import { getCoordinates } from '../utils/getCoordinates';
-import useLocation from '../hooks/useLocation';
+import { useLocation } from '../hooks/useLocation';
 
 type locationFormProps = {
     type: "start" | "end",

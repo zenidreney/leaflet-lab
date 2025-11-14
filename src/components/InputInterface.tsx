@@ -1,4 +1,4 @@
-import useLocation from '../hooks/useLocation';
+import { useLocation } from '../hooks/useLocation';
 
 import Stack from 'react-bootstrap/Stack';
 
