@@ -8,7 +8,7 @@ import LocationForm from "../components/LocationForm";
 
 export default function InputInterface() {
     // console.log("loading: ", loading, "error: ", error)
-    const { distance } = useLocation()
+    const { distance, journeyDuration } = useLocation()
 
 
 
@@ -32,7 +32,8 @@ export default function InputInterface() {
                     <LocationForm type="end">I want to end my journey at...</LocationForm>
 
 
-                {distance && <p>Total distance: {distance} kms</p>}
+                {distance && <p>Total distance: { distance } kms</p>}
+                {journeyDuration && <p>Duration: { journeyDuration } hours</p>}
                 </Stack>
 
             </Stack>
