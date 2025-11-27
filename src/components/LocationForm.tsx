@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -14,7 +14,6 @@ type locationFormProps = {
 
 
 function LocationForm({ type, children }: locationFormProps) {
-    console.log(children)
 
     const locationRef = useRef<HTMLInputElement>(null)
     const {
@@ -23,10 +22,12 @@ function LocationForm({ type, children }: locationFormProps) {
         endLocation,
         setEndLocation
     } = useLocation()
+    const { location: startLoc } = startLocation
+    const { location: endLoc } = endLocation
 
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
-
+        
         const locationName = locationRef.current && locationRef.current.value ? locationRef.current.value : "madrid"
         const { name, latitude, longitude } = await getCoordinates(locationName)
 
@@ -48,24 +49,8 @@ function LocationForm({ type, children }: locationFormProps) {
         }
     }
 
-    // JUST FOR DEVELOPMENT CONSOLE
-
-    useEffect(() => {
-        const { location: startLocConsole, lat: startLatConsole, long: startLongConsole } = startLocation
-        const { location: endLocConsole, lat: endLatConsole, long: endLongConsole } = endLocation
-
-        console.log("Start City:", startLocConsole, "latitude", startLatConsole, "longitude", startLongConsole);
-        console.log("End City:", endLocConsole, "latitude", endLatConsole, "longitude", endLongConsole)
-    }, [startLocation, endLocation]);
-
-    const { location: startLoc, lat: startLat, long: startLong } = startLocation
-    const { location: endLoc, lat: endLat, long: endLong } = endLocation
-
-    console.log("Start 2nd console", startLoc, startLat, startLong)
-    console.log("End 2nd console", endLoc, endLat, endLong)
-
-    // END OF CONSOLE
-
+    
+    
     return (
         <Form onSubmit={handleSubmit}>
             <Stack direction="horizontal" gap={3} className='align-items-end'>
