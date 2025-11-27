@@ -7,13 +7,13 @@ import Stack from 'react-bootstrap/Stack';
 import { getCoordinates } from '../utils/getCoordinates';
 import { useLocation } from '../hooks/useLocation';
 
-type locationFormProps = {
+type LocationFormProps = {
     type: "start" | "end",
     children?: React.ReactNode
 }
 
 
-function LocationForm({ type, children }: locationFormProps) {
+function LocationForm({ type, children }: LocationFormProps) {
 
     const locationRef = useRef<HTMLInputElement>(null)
     const {
@@ -22,35 +22,27 @@ function LocationForm({ type, children }: locationFormProps) {
         endLocation,
         setEndLocation
     } = useLocation()
-    const { location: startLoc } = startLocation
-    const { location: endLoc } = endLocation
+    const { location: startPoint } = startLocation
+    const { location: endPoint } = endLocation
 
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
-        
-        const locationName = locationRef.current && locationRef.current.value ? locationRef.current.value : "madrid"
+
+        const locationName = locationRef.current && locationRef.current.value ? locationRef.current.value : ""
         const { name, latitude, longitude } = await getCoordinates(locationName)
 
-        if (type === "start") {
+        const setLocationType = type === "start" ? setStartLocation : setEndLocation
 
-            setStartLocation({
+        setLocationType(
+            {
                 location: name,
                 lat: latitude,
                 long: longitude
             })
-
-        } else if (type === "end") {
-
-            setEndLocation({
-                location: name,
-                lat: latitude,
-                long: longitude
-            })
-        }
     }
 
-    
-    
+
+
     return (
         <Form onSubmit={handleSubmit}>
             <Stack direction="horizontal" gap={3} className='align-items-end'>
@@ -73,10 +65,10 @@ function LocationForm({ type, children }: locationFormProps) {
                 </Button>
 
             </Stack>
-            
-            {type === "start" && startLoc && <p>Start at: {startLoc}</p>}
 
-            {type === "end" && endLoc && <p>End at: {endLoc}</p>}
+            {type === "start" && startPoint && <p>Start at: {startPoint}</p>}
+
+            {type === "end" && endPoint && <p>End at: {endPoint}</p>}
 
         </Form>
     )
