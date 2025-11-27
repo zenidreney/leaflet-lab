@@ -10,7 +10,14 @@ export async function getCoordinates(location: string) {
         }
 
         const data = await res.json()
-        //console.log(typeof data[0].name, typeof data[0].lat, typeof data[0].lon)
+
+        // console.log(data.length, Array.isArray(data))
+
+        if( !Array.isArray(data) || data.length === 0 ) {
+            alert("Please enter a valid city or town in the text box")
+            throw new Error("No results found")
+        }
+
 
         return {
             name: data[0].name,
