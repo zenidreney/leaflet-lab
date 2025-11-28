@@ -40,7 +40,11 @@ function LocationForm({ type, children }: LocationFormProps) {
                 long: longitude
             })
     }
+    const { location: startLoc, lat: startLat, long: startLong } = startLocation
+    const { location: endLoc, lat: endLat, long: endLong } = endLocation
 
+    console.log("Start coordinates", startLoc, startLat, startLong)
+    console.log("End coordinates", endLoc, endLat, endLong)
 
 
     return (
