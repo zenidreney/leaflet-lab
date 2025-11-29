@@ -12,7 +12,7 @@ function App() {
     
       <LocationContextProvider>
 
-        <Stack gap={3} className="app-container mt-3 text-white px-3 pb-3">
+        <Stack gap={3} className="app-container mt-3 text-white px-3 pb-3 shadow-lg">
           <InputInterface />
           <Stack className="rounded-3 overflow-hidden"><Map /></Stack>
         </Stack>

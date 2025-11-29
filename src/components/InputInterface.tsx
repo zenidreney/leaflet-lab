@@ -14,27 +14,25 @@ export default function InputInterface() {
 
 
     return (
-        <Stack direction="vertical" className="van-detail-container">
+        <Stack direction="vertical">
 
             <Stack
                 direction="horizontal"
                 gap={5}
                 className="
-                        van-description-container 
                         flex-column-reverse
                         flex-md-row
-                        
                         ">
-                <Stack className="m-3 m-md-0 p-2" gap={3} >
+                <Stack className="m-0 p-2" gap={3} >
 
-                   
+
 
                     <LocationForm type="start">Start from...</LocationForm>
                     <LocationForm type="end">End at...</LocationForm>
 
 
-                {distance && <p>Total distance: { distance } kms</p>}
-                {journeyDuration && <p>Duration: { journeyDuration } hours</p>}
+                    {distance && <p>Total distance: {distance} kms</p>}
+                    {journeyDuration && <p>Duration: {journeyDuration} hours</p>}
                 </Stack>
 
             </Stack>

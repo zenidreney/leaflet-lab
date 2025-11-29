@@ -50,14 +50,19 @@ function LocationForm({ type, children }: LocationFormProps) {
     return (
         <Form onSubmit={handleSubmit}>
             <Stack direction="horizontal" gap={3} className='align-items-end'>
-                <Form.Group controlId= {`form-${type}-location`} style={
-                    { width: "100%" }
-                }>
+                <Form.Group
+                    controlId={`form-${type}-location`}
+                    style={
+                        { width: "100%" }
+                    }>
                     <Form.Label>
                         {children}
                     </Form.Label>
                     <Form.Control
                         ref={userInputTextRef}
+                        style={
+                            { maxWidth: "520px" }
+                        }
                         type="text"
                         placeholder="Enter a city or a town..."
                         required
