@@ -23,13 +23,14 @@ export default function InputInterface() {
                         van-description-container 
                         flex-column-reverse
                         flex-md-row
+                        
                         ">
-                <Stack className="m-3 m-md-0">
+                <Stack className="m-3 m-md-0 p-2">
 
                    
 
-                    <LocationForm type="start">I want to start my journey from...</LocationForm>
-                    <LocationForm type="end">I want to end my journey at...</LocationForm>
+                    <LocationForm type="start">Start from...</LocationForm>
+                    <LocationForm type="end">End at...</LocationForm>
 
 
                 {distance && <p>Total distance: { distance } kms</p>}

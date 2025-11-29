@@ -53,7 +53,7 @@ function LocationForm({ type, children }: LocationFormProps) {
                 <Form.Group controlId="formStartLocation" style={
                     { width: "100%" }
                 }>
-                    <Form.Label className="text-muted">
+                    <Form.Label>
                         {children}
                     </Form.Label>
                     <Form.Control

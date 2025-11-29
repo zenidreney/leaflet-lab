@@ -1,5 +1,10 @@
+
+
 div.app-container {
+    background-color: rgb(117, 30, 30);
+    border-radius: 12px;
     max-width: 920px;
     margin: 0 auto;
-    width: 100%;
+    width: 90%;
+
 }
