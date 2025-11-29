@@ -29,15 +29,21 @@ function LocationForm({ type, children }: LocationFormProps) {
         e.preventDefault()
 
         const locationName = userInputTextRef.current && userInputTextRef.current.value ? userInputTextRef.current.value : ""
-        const { name, latitude, longitude } = await getCoordinates(locationName)
+        const dataFromGetCoordinates = await getCoordinates(locationName)
+
+        console.log(dataFromGetCoordinates[0])
+
+        //  name: data[0].name,
+        //     latitude: data[0].lat,
+        //     longitude: data[0].lon
 
         const setLocationType = type === "start" ? setStartLocation : setEndLocation
 
         setLocationType(
             {
-                location: name,
-                lat: latitude,
-                long: longitude
+                location: dataFromGetCoordinates[0].display_name,
+                lat: dataFromGetCoordinates[0].lat,
+                long: dataFromGetCoordinates[0].lon
             })
     }
     const { location: startLoc, lat: startLat, long: startLong } = startLocation
