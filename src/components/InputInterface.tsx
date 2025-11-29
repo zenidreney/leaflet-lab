@@ -25,7 +25,7 @@ export default function InputInterface() {
                         flex-md-row
                         
                         ">
-                <Stack className="m-3 m-md-0 p-2">
+                <Stack className="m-3 m-md-0 p-2" gap={3} >
 
                    
 

@@ -15,7 +15,7 @@ type LocationFormProps = {
 
 function LocationForm({ type, children }: LocationFormProps) {
 
-    const locationRef = useRef<HTMLInputElement>(null)
+    const userInputTextRef = useRef<HTMLInputElement>(null)
     const {
         startLocation,
         setStartLocation,
@@ -28,7 +28,7 @@ function LocationForm({ type, children }: LocationFormProps) {
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
 
-        const locationName = locationRef.current && locationRef.current.value ? locationRef.current.value : ""
+        const locationName = userInputTextRef.current && userInputTextRef.current.value ? userInputTextRef.current.value : ""
         const { name, latitude, longitude } = await getCoordinates(locationName)
 
         const setLocationType = type === "start" ? setStartLocation : setEndLocation
@@ -50,27 +50,27 @@ function LocationForm({ type, children }: LocationFormProps) {
     return (
         <Form onSubmit={handleSubmit}>
             <Stack direction="horizontal" gap={3} className='align-items-end'>
-                <Form.Group controlId="formStartLocation" style={
+                <Form.Group controlId= {`form-${type}-location`} style={
                     { width: "100%" }
                 }>
                     <Form.Label>
                         {children}
                     </Form.Label>
                     <Form.Control
-                        ref={locationRef}
+                        ref={userInputTextRef}
                         type="text"
                         placeholder="Enter a city or a town..."
                         required
                     />
                 </Form.Group>
 
-                <Button variant="primary" type="submit">
+                <Button variant="success" type="submit">
                     Submit
                 </Button>
 
             </Stack>
 
-            {type === "start" && startPoint && <p>Start at: {startPoint}</p>}
+            {type === "start" && startPoint && <p>Start from: {startPoint}</p>}
 
             {type === "end" && endPoint && <p>End at: {endPoint}</p>}
 
