@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -12,7 +12,7 @@ type LocationFormProps = {
     children?: React.ReactNode
 }
 
-type LocationResult = {
+type GetCoordinatesResult = {
     place_id: number;
     licence: string;
     osm_type: string;
@@ -32,7 +32,11 @@ type LocationResult = {
 
 function LocationForm({ type, children }: LocationFormProps) {
 
-    const [locationData, setLocationData] = useState<LocationResult[] | null>(null)
+    const [locationData, setLocationData] = useState<GetCoordinatesResult[] | null>(null)
+    const [isStartSubmitted, setIsStartSubmitted] = useState<boolean>(false)
+    const [isEndSubmitted, setIsEndSubmitted] = useState<boolean>(false)
+
+    const isSubmitted = (type === "start") ? isStartSubmitted : isEndSubmitted
 
     const userInputTextRef = useRef<HTMLInputElement>(null)
     const {
@@ -43,6 +47,8 @@ function LocationForm({ type, children }: LocationFormProps) {
     } = useLocation()
     const { location: startPoint } = startLocation
     const { location: endPoint } = endLocation
+    const setLocationType = (type === "start") ? setStartLocation : setEndLocation
+    const setIsSubmitted = (type === "start") ? setIsStartSubmitted : setIsEndSubmitted
 
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
@@ -51,7 +57,6 @@ function LocationForm({ type, children }: LocationFormProps) {
         const dataFromGetCoordinates = await getCoordinates(locationName)
         // dataFromGetCoordinates.forEach(data => console.log(data.osm_id))
 
-        const setLocationType = (type === "start") ? setStartLocation : setEndLocation
 
         setLocationType(
             {
@@ -61,15 +66,14 @@ function LocationForm({ type, children }: LocationFormProps) {
             })
 
         setLocationData(dataFromGetCoordinates)
+        setIsSubmitted(true)
     }
 
-    useEffect(() => console.log(locationData), [locationData])
 
     // const { location: startLoc, lat: startLat, long: startLong } = startLocation
     // const { location: endLoc, lat: endLat, long: endLong } = endLocation
 
     const searchLocationOptions = locationData?.map(loc => {
-        const setLocationType = (type === "start") ? setStartLocation : setEndLocation
         console.log(loc.osm_id)
         return <Button
             key={loc.osm_id}
@@ -81,9 +85,12 @@ function LocationForm({ type, children }: LocationFormProps) {
                         lat: loc.lat,
                         long: loc.lon
                     })
+                setIsSubmitted(false)
 
             }}
-        >{loc.display_name}</Button>
+        >
+            {loc.display_name}
+        </Button>
     })
 
     console.log(searchLocationOptions)
@@ -125,7 +132,7 @@ function LocationForm({ type, children }: LocationFormProps) {
             {type === "end" && endPoint && <p>End at: {endPoint}</p>}
 
             <Stack gap={3}>
-                {
+                {isSubmitted &&
                     searchLocationOptions
                 }
             </Stack>
