@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -12,8 +12,27 @@ type LocationFormProps = {
     children?: React.ReactNode
 }
 
+type LocationResult = {
+    place_id: number;
+    licence: string;
+    osm_type: string;
+    osm_id: number;
+    lat: string;
+    lon: string;
+    display_name: string;
+    class: string;
+    type: string;
+    place_rank: number;
+    importance: number;
+    name: string;
+    addresstype: string;
+    boundingbox: string[];
+};
+
 
 function LocationForm({ type, children }: LocationFormProps) {
+
+    const [locationData, setLocationData] = useState< LocationResult[] | null>(null)
 
     const userInputTextRef = useRef<HTMLInputElement>(null)
     const {
@@ -30,14 +49,9 @@ function LocationForm({ type, children }: LocationFormProps) {
 
         const locationName = userInputTextRef.current && userInputTextRef.current.value ? userInputTextRef.current.value : ""
         const dataFromGetCoordinates = await getCoordinates(locationName)
+        // dataFromGetCoordinates.forEach(data => console.log(data.osm_id))
 
-        console.log(dataFromGetCoordinates[0])
-
-        //  name: data[0].name,
-        //     latitude: data[0].lat,
-        //     longitude: data[0].lon
-
-        const setLocationType = type === "start" ? setStartLocation : setEndLocation
+        const setLocationType = (type === "start") ? setStartLocation : setEndLocation
 
         setLocationType(
             {
@@ -45,12 +59,25 @@ function LocationForm({ type, children }: LocationFormProps) {
                 lat: dataFromGetCoordinates[0].lat,
                 long: dataFromGetCoordinates[0].lon
             })
-    }
-    const { location: startLoc, lat: startLat, long: startLong } = startLocation
-    const { location: endLoc, lat: endLat, long: endLong } = endLocation
 
-    console.log("Start coordinates", startLoc, startLat, startLong)
-    console.log("End coordinates", endLoc, endLat, endLong)
+        setLocationData(dataFromGetCoordinates)
+    }
+
+    useEffect(() => console.log(locationData), [locationData])
+
+    // const { location: startLoc, lat: startLat, long: startLong } = startLocation
+    // const { location: endLoc, lat: endLat, long: endLong } = endLocation
+
+    const searchLocationOptions = locationData?.map(loc => {
+        console.log(loc.osm_id)
+        return <p key={loc.osm_id}>{loc.display_name}</p>
+    })
+
+    console.log(searchLocationOptions)
+
+
+    // console.log("Start coordinates", startLoc, startLat, startLong)
+    // console.log("End coordinates", endLoc, endLat, endLong)
 
 
     return (
@@ -78,13 +105,15 @@ function LocationForm({ type, children }: LocationFormProps) {
                 <Button variant="success" type="submit">
                     Submit
                 </Button>
-
             </Stack>
 
             {type === "start" && startPoint && <p>Start from: {startPoint}</p>}
 
             {type === "end" && endPoint && <p>End at: {endPoint}</p>}
 
+            {
+                searchLocationOptions
+            }
         </Form>
     )
 }
