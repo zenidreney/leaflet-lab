@@ -32,7 +32,7 @@ type LocationResult = {
 
 function LocationForm({ type, children }: LocationFormProps) {
 
-    const [locationData, setLocationData] = useState< LocationResult[] | null>(null)
+    const [locationData, setLocationData] = useState<LocationResult[] | null>(null)
 
     const userInputTextRef = useRef<HTMLInputElement>(null)
     const {
@@ -69,8 +69,21 @@ function LocationForm({ type, children }: LocationFormProps) {
     // const { location: endLoc, lat: endLat, long: endLong } = endLocation
 
     const searchLocationOptions = locationData?.map(loc => {
+        const setLocationType = (type === "start") ? setStartLocation : setEndLocation
         console.log(loc.osm_id)
-        return <p key={loc.osm_id}>{loc.display_name}</p>
+        return <Button
+            key={loc.osm_id}
+            variant="warning"
+            onClick={() => {
+                setLocationType(
+                    {
+                        location: loc.display_name,
+                        lat: loc.lat,
+                        long: loc.lon
+                    })
+
+            }}
+        >{loc.display_name}</Button>
     })
 
     console.log(searchLocationOptions)
@@ -111,9 +124,11 @@ function LocationForm({ type, children }: LocationFormProps) {
 
             {type === "end" && endPoint && <p>End at: {endPoint}</p>}
 
-            {
-                searchLocationOptions
-            }
+            <Stack gap={3}>
+                {
+                    searchLocationOptions
+                }
+            </Stack>
         </Form>
     )
 }
