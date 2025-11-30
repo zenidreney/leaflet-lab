@@ -55,8 +55,6 @@ function LocationForm({ type, children }: LocationFormProps) {
 
         const locationName = userInputTextRef.current && userInputTextRef.current.value ? userInputTextRef.current.value : ""
         const dataFromGetCoordinates = await getCoordinates(locationName)
-        // dataFromGetCoordinates.forEach(data => console.log(data.osm_id))
-
 
         setLocationType(
             {
@@ -68,10 +66,6 @@ function LocationForm({ type, children }: LocationFormProps) {
         setLocationData(dataFromGetCoordinates)
         setIsSubmitted(true)
     }
-
-
-    // const { location: startLoc, lat: startLat, long: startLong } = startLocation
-    // const { location: endLoc, lat: endLat, long: endLong } = endLocation
 
     const searchLocationOptions = locationData?.map(loc => {
         console.log(loc.osm_id)
@@ -93,13 +87,6 @@ function LocationForm({ type, children }: LocationFormProps) {
         </Button>
     })
 
-    console.log(searchLocationOptions)
-
-
-    // console.log("Start coordinates", startLoc, startLat, startLong)
-    // console.log("End coordinates", endLoc, endLat, endLong)
-
-
     return (
         <Form onSubmit={handleSubmit}>
             <Stack direction="horizontal" gap={3} className='align-items-end'>
@@ -118,6 +105,7 @@ function LocationForm({ type, children }: LocationFormProps) {
                         }
                         type="text"
                         placeholder="Enter a city or a town..."
+                        className='mb-1'
                         required
                     />
                 </Form.Group>
