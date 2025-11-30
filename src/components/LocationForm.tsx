@@ -105,7 +105,6 @@ function LocationForm({ type, children }: LocationFormProps) {
                         }
                         type="text"
                         placeholder="Enter a city or a town..."
-                        className='mb-1'
                         required
                     />
                 </Form.Group>
@@ -115,9 +114,9 @@ function LocationForm({ type, children }: LocationFormProps) {
                 </Button>
             </Stack>
 
-            {type === "start" && startPoint && <p>Start from: {startPoint}</p>}
+            {type === "start" && startPoint && <p className='mt-1'>Start from: {startPoint}</p>}
 
-            {type === "end" && endPoint && <p>End at: {endPoint}</p>}
+            {type === "end" && endPoint && <p className='mt-1'>End at: {endPoint}</p>}
 
             <Stack gap={3}>
                 {isSubmitted &&
