@@ -47,7 +47,7 @@ function LocationForm({ type, children }: LocationFormProps) {
     } = useLocation()
     const { location: startPoint } = startLocation
     const { location: endPoint } = endLocation
-    const setLocationType = (type === "start") ? setStartLocation : setEndLocation
+    const setLocationByType = (type === "start") ? setStartLocation : setEndLocation
     const setIsSubmitted = (type === "start") ? setIsStartSubmitted : setIsEndSubmitted
 
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -60,7 +60,7 @@ function LocationForm({ type, children }: LocationFormProps) {
         const firstResultLatitude = dataFromGetCoordinates[0].lat
         const firstResultLongitude = dataFromGetCoordinates[0].lon
 
-        setLocationType(
+        setLocationByType(
             {
                 location: firstResultLocation,
                 lat: firstResultLatitude,
@@ -72,7 +72,7 @@ function LocationForm({ type, children }: LocationFormProps) {
     }
 
     function handleLocationOptionButton(location: GetCoordinatesResult) {
-        setLocationType(
+        setLocationByType(
             {
                 location: location.display_name,
                 lat: location.lat,
@@ -82,14 +82,16 @@ function LocationForm({ type, children }: LocationFormProps) {
     }
 
     const searchLocationOptions = locationData?.map(loc => {
-        console.log(loc.osm_id)
-        return <Button
-            key={loc.osm_id}
-            variant="warning"
-            onClick={() => handleLocationOptionButton(loc)}
-        >
-            {loc.display_name}
-        </Button>
+
+        return (
+            <Button
+                key={loc.osm_id}
+                variant="warning"
+                onClick={() => handleLocationOptionButton(loc)}
+            >
+                {loc.display_name}
+            </Button>
+        )
     })
 
     return (
