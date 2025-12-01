@@ -56,15 +56,29 @@ function LocationForm({ type, children }: LocationFormProps) {
         const locationName = userInputTextRef.current && userInputTextRef.current.value ? userInputTextRef.current.value : ""
         const dataFromGetCoordinates = await getCoordinates(locationName)
 
+        const firstResultLocation = dataFromGetCoordinates[0].display_name
+        const firstResultLatitude = dataFromGetCoordinates[0].lat
+        const firstResultLongitude = dataFromGetCoordinates[0].lon
+
         setLocationType(
             {
-                location: dataFromGetCoordinates[0].display_name,
-                lat: dataFromGetCoordinates[0].lat,
-                long: dataFromGetCoordinates[0].lon
+                location: firstResultLocation,
+                lat: firstResultLatitude,
+                long: firstResultLongitude
             })
 
         setLocationData(dataFromGetCoordinates)
         setIsSubmitted(true)
+    }
+
+    function handleLocationOptionButton(location: GetCoordinatesResult) {
+        setLocationType(
+            {
+                location: location.display_name,
+                lat: location.lat,
+                long: location.lon
+            })
+        setIsSubmitted(false)
     }
 
     const searchLocationOptions = locationData?.map(loc => {
@@ -72,16 +86,7 @@ function LocationForm({ type, children }: LocationFormProps) {
         return <Button
             key={loc.osm_id}
             variant="warning"
-            onClick={() => {
-                setLocationType(
-                    {
-                        location: loc.display_name,
-                        lat: loc.lat,
-                        long: loc.lon
-                    })
-                setIsSubmitted(false)
-
-            }}
+            onClick={() => handleLocationOptionButton(loc)}
         >
             {loc.display_name}
         </Button>
