@@ -1,4 +1,4 @@
-# Leaflet Lab
+# ZenidMap
 
 A professional React & TypeScript application powered by Vite, designed for seamless map-based routing and distance estimation. Users enter start and end locations to visualize routes, see total distance, and estimate travel time.
 
@@ -43,4 +43,4 @@ The software is provided "AS IS", without warranty of any kind.
 
 ---
 
-For modern web mapping applications, Leaflet Lab delivers simplicity and efficiency in route visualization.
+For modern web mapping applications, [ZenidMap](https://github.com/zenidreney/leaflet-lab) delivers simplicity and efficiency in route visualization.
