@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -53,12 +53,6 @@ function LocationForm({ type, children }: LocationFormProps) {
 	const setIsSubmitted =
 		type === "start" ? setIsStartSubmitted : setIsEndSubmitted;
 
-	useEffect(() => {
-		if (endPoint) {
-			mapRef.current?.scrollIntoView();
-		}
-	}, [mapRef, endPoint]);
-
 	async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
 
@@ -87,6 +81,8 @@ function LocationForm({ type, children }: LocationFormProps) {
 			lat: location.lat,
 			long: location.lon,
 		});
+
+		if (type === "end") mapRef.current?.scrollIntoView();
 		setIsSubmitted(false);
 	}
 
