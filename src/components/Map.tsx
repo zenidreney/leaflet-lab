@@ -105,7 +105,6 @@ export default function Map() {
     // END OF CONSOLE
 
     return (
-        <>
 
             <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false} style={mapStyle}>
                 <TileLayer
@@ -118,7 +117,6 @@ export default function Map() {
 
                 {route.length > 0 && <Polyline positions={route} color="purple" />}
             </MapContainer>
-        </>
 
     )
 }
