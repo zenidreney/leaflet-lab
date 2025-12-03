@@ -50,7 +50,8 @@ export default function UserMap() {
         distance,
         setDistance,
         journeyDuration,
-        setJourneyDuration
+        setJourneyDuration,
+        mapRef
     } = useLocation()
     //const [route, setRoute] = useState<[number, number][]>([])
 
@@ -106,17 +107,17 @@ export default function UserMap() {
 
     return (
 
-            <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false} style={mapStyle}>
-                <TileLayer
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-                <FitMap route={route} />
-
-                <CenterMap lat={startLat ? startLat : endLat} long={startLong ? startLong : endLong} />
-
-                {route.length > 0 && <Polyline positions={route} color="purple" />}
-            </MapContainer>
+            <div ref={mapRef}>
+                <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false} style={mapStyle}>
+                    <TileLayer
+                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    />
+                    <FitMap route={route} />
+                    <CenterMap lat={startLat ? startLat : endLat} long={startLong ? startLong : endLong} />
+                    {route.length > 0 && <Polyline positions={route} color="purple" />}
+                </MapContainer>
+            </div>
 
     )
 }
