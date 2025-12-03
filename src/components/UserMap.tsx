@@ -40,7 +40,7 @@ function FitMap({ route }: { route: [number, number][] }) {
 }
 
 
-export default function Map() {
+export default function UserMap() {
 
     const {
         startLocation,

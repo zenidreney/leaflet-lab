@@ -1,6 +1,6 @@
 import InputInterface from "./components/InputInterface"
 import { LocationContextProvider } from "./context/LocationContext"
-import Map from "./components/Map"
+import Map from "./components/UserMap"
 
 import Stack from 'react-bootstrap/Stack';
 
