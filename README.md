@@ -8,7 +8,7 @@ A professional React & TypeScript application powered by Vite, designed for seam
 - Responsive React + Bootstrap UI with clean modular architecture
 - TypeScript for robust type safety
 - Context-driven state management for locations and mapping
-- ESLint integration for enforced code quality
+- Biome integration for code quality
 
 ## Getting Started
 
