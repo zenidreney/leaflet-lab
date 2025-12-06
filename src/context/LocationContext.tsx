@@ -1,4 +1,4 @@
-import { createContext, useState, useRef, type Dispatch, type ReactNode, type SetStateAction } from "react";
+import { createContext, type Dispatch, type ReactNode, type SetStateAction, useRef, useState } from "react";
 
 type LocationObject = {
     location: string | null
