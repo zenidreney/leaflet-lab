@@ -1,6 +1,6 @@
 # ZenidMap
 
-A professional React & TypeScript application powered by Vite, designed for seamless map-based routing and distance estimation. Users enter start and end locations to visualize routes, see total distance, and estimate travel time.
+A functional React & TypeScript application powered by Vite, designed for seamless map-based routing and distance estimation. Users enter start and end locations to visualize routes, see total distance, and estimate travel time.
 
 ## Key Features
 - Interactive map rendering via [Leaflet](https://leafletjs.com/) and [react-leaflet](https://react-leaflet.js.org/)
