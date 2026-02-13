@@ -20,8 +20,10 @@ export default function InputInterface() {
 					<LocationForm type="start">Start from...</LocationForm>
 					<LocationForm type="end">End at...</LocationForm>
 
-					{distance && <p>Total distance: {distance} kms</p>}
-					{journeyDuration && <p>Duration: {journeyDuration} hours</p>}
+					<Stack>
+						{distance && <p className="fw-bold">Total distance: {distance} kms</p>}
+						{journeyDuration && <p className="fw-bold">Duration: {journeyDuration} hours</p>}
+					</Stack>
 				</Stack>
 			</Stack>
 		</Stack>
