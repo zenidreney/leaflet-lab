@@ -60,7 +60,7 @@ export default function UserMap() {
 			try {
 				setIsRouteLoading(true)
 				const res = await fetch(
-					`https://.org/route/v1/driving/${startLong},${startLat};${endLong},${endLat}?overview=full&geometries=geojson`,
+					`https://router.project-osrm.org/route/v1/driving/${startLong},${startLat};${endLong},${endLat}?overview=full&geometries=geojson`,
 				);
 				const data = await res.json();
 				console.log("Route Data:", typeof data.routes[0].legs[0].duration);
