@@ -1,5 +1,5 @@
 import "leaflet/dist/leaflet.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Stack from "react-bootstrap/Stack";
 import { MapContainer, Polyline, TileLayer, useMap } from "react-leaflet";
 import { useLocation } from "../hooks/useLocation";
@@ -49,6 +49,7 @@ export default function UserMap() {
 
 	const { lat: startLat, long: startLong } = startLocation;
 	const { lat: endLat, long: endLong } = endLocation;
+	const [isRouteLoading, setIsRouteLoading] = useState(false)
 
 	useEffect(() => {
 		if (!startLat || !endLat) {
@@ -56,6 +57,7 @@ export default function UserMap() {
 		}
 
 		async function fetchRoute() {
+			setIsRouteLoading(true)
 			const res = await fetch(
 				`https://router.project-osrm.org/route/v1/driving/${startLong},${startLat};${endLong},${endLat}?overview=full&geometries=geojson`,
 			);
@@ -74,6 +76,7 @@ export default function UserMap() {
 					([lng, lat]: [number, number]) => [lat, lng],
 				);
 				setRoute(coords);
+				setIsRouteLoading(false)
 			}
 		}
 
@@ -103,6 +106,7 @@ export default function UserMap() {
 
 	return (
 		<Stack ref={mapRef}>
+			{isRouteLoading ? <p>Route Loading...</p> : ""}
 			<MapContainer
 				center={[51.505, -0.09]}
 				zoom={13}
