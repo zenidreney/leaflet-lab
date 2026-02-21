@@ -57,25 +57,30 @@ export default function UserMap() {
 		}
 
 		async function fetchRoute() {
-			setIsRouteLoading(true)
-			const res = await fetch(
-				`https://router.project-osrm.org/route/v1/driving/${startLong},${startLat};${endLong},${endLat}?overview=full&geometries=geojson`,
-			);
-			const data = await res.json();
-			console.log("Route Data:", typeof data.routes[0].legs[0].duration);
-			const distanceInKm = Math.floor(data.routes[0].legs[0].distance / 1000);
-			setDistance(distanceInKm);
-
-			const secondsToHours = 1 / 3600;
-			const journeyDurationInHours =
-				data.routes[0].legs[0].duration * secondsToHours;
-			setJourneyDuration(journeyDurationInHours.toFixed(2));
-
-			if (data.routes?.length) {
-				const coords = data.routes[0].geometry.coordinates.map(
-					([lng, lat]: [number, number]) => [lat, lng],
+			try {
+				setIsRouteLoading(true)
+				const res = await fetch(
+					`https://.org/route/v1/driving/${startLong},${startLat};${endLong},${endLat}?overview=full&geometries=geojson`,
 				);
-				setRoute(coords);
+				const data = await res.json();
+				console.log("Route Data:", typeof data.routes[0].legs[0].duration);
+				const distanceInKm = Math.floor(data.routes[0].legs[0].distance / 1000);
+				setDistance(distanceInKm);
+	
+				const secondsToHours = 1 / 3600;
+				const journeyDurationInHours =
+					data.routes[0].legs[0].duration * secondsToHours;
+				setJourneyDuration(journeyDurationInHours.toFixed(2));
+	
+				if (data.routes?.length) {
+					const coords = data.routes[0].geometry.coordinates.map(
+						([lng, lat]: [number, number]) => [lat, lng],
+					);
+					setRoute(coords);
+				}
+			} catch (error) {
+				throw new Error(`Cannot fetch route becaouse of ${error}`)
+			} finally {
 				setIsRouteLoading(false)
 			}
 		}
