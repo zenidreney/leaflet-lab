@@ -4,11 +4,14 @@ import Tabs from "react-bootstrap/Tabs";
 import InputInterface from "./components/InputInterface";
 import RouteMap from "./components/RouteMap";
 import { LocationContextProvider } from "./context/LocationContext";
+import { useState } from "react";
 
 import "./App.css";
 import SingleMap from "./components/SingleMap";
 
 function App() {
+	const [activeTab, setActiveTab] = useState<"single" | "route">("single");
+	
 	return (
 		<LocationContextProvider>
 			<Stack
@@ -19,11 +22,12 @@ function App() {
 					<h1>ZenidMap</h1>
 				</Stack>
 				<Tabs
-					defaultActiveKey="profile"
-					id="uncontrolled-tab-example"
+					id="zenidmap-tabs"
+					activeKey={activeTab}
+					onSelect={(k) => setActiveTab(k as "single" | "route")}
 					className="mb-3"
 				>
-					<Tab eventKey="map" title="Map">
+					<Tab eventKey="single" title="Single">
 						<SingleMap />
 					</Tab>
 					<Tab eventKey="route" title="Route">
