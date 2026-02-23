@@ -11,7 +11,7 @@ import SingleMap from "./components/SingleMap";
 
 function App() {
 	const [activeTab, setActiveTab] = useState<"single" | "route">("single");
-	
+
 	return (
 		<LocationContextProvider>
 			<Stack
@@ -33,7 +33,7 @@ function App() {
 					<Tab eventKey="route" title="Route">
 						<InputInterface />
 						<Stack className="rounded-3 overflow-hidden">
-							<RouteMap />
+							<RouteMap key={activeTab} />
 						</Stack>
 					</Tab>
 				</Tabs>
