@@ -32,8 +32,7 @@ export default function SingleMap() {
 	};
 
 	return (
-		<>
-			<p>I am Single Map</p>
+		<Stack gap={3} >
 			<LocationForm type="start" />
 			<Stack ref={mapRef}>
 				<MapContainer
@@ -49,6 +48,6 @@ export default function SingleMap() {
 					<CenterMap lat={startLat} long={startLong} />
 				</MapContainer>
 			</Stack>
-		</>
+		</Stack>
 	);
 }
