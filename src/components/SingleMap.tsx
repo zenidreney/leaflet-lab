@@ -1,6 +1,6 @@
 import LocationForm from "./LocationForm";
 import { Stack } from "react-bootstrap";
-import { MapContainer, TileLayer, useMap } from "react-leaflet";
+import { MapContainer, Polyline, TileLayer, useMap } from "react-leaflet";
 import { useEffect } from "react";
 import { useLocation } from "../hooks/useLocation";
 

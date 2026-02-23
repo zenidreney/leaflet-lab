@@ -3,7 +3,7 @@ export async function getCoordinates(location: string) {
 		const res = await fetch(
 			`https://nominatim.openstreetmap.org/search?format=json&q=${location}`,
 			{
-				headers: { "User-Agent": "van-trip-explorer-student-project/1.0" },
+				headers: { "User-Agent": "zenidmap-student-project/1.0" },
 			},
 		);
 		if (!res.ok) {
