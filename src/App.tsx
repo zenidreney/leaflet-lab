@@ -26,10 +26,10 @@ function App() {
 					onSelect={(k) => setActiveTab(k as "single" | "route")}
 					className="mb-3"
 				>
-					<Tab eventKey="single" title="Single">
+					<Tab eventKey="single" title="Single Map">
 						<SingleMap />
 					</Tab>
-					<Tab eventKey="route" title="Route">
+					<Tab eventKey="route" title="Route Finder">
 						<Stack className="rounded-3 overflow-hidden">
 							<RouteMap key={activeTab} />
 						</Stack>

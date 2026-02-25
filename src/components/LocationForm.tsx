@@ -121,7 +121,7 @@ function LocationForm({ type, children }: LocationFormProps) {
 			</Stack>
 
 			{type === "start" && startPoint && (
-				<p className="mt-1">Your are at: {startPoint}</p>
+				<p className="mt-1">You are at: {startPoint}</p>
 			)}
 
 			{type === "end" && endPoint && <p className="mt-1">Arriving to: {endPoint}</p>}
