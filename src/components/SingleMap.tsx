@@ -33,7 +33,7 @@ export default function SingleMap() {
 
 	return (
 		<Stack gap={3} >
-			<LocationForm type="start" />
+			<LocationForm type="start">Choose a city or town to center map</LocationForm>
 			<Stack ref={mapRef}>
 				<MapContainer
 					center={[51.505, -0.09]}

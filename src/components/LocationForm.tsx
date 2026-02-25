@@ -121,10 +121,10 @@ function LocationForm({ type, children }: LocationFormProps) {
 			</Stack>
 
 			{type === "start" && startPoint && (
-				<p className="mt-1">Start from: {startPoint}</p>
+				<p className="mt-1">Your are at: {startPoint}</p>
 			)}
 
-			{type === "end" && endPoint && <p className="mt-1">End at: {endPoint}</p>}
+			{type === "end" && endPoint && <p className="mt-1">Arriving to: {endPoint}</p>}
 
 			<Stack gap={3}>{isSubmitted && searchLocationOptions}</Stack>
 		</Form>

@@ -1,7 +1,6 @@
 import Stack from "react-bootstrap/Stack";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
-import InputInterface from "./components/InputInterface";
 import RouteMap from "./components/RouteMap";
 import { LocationContextProvider } from "./context/LocationContext";
 import { useState } from "react";
@@ -31,7 +30,6 @@ function App() {
 						<SingleMap />
 					</Tab>
 					<Tab eventKey="route" title="Route">
-						<InputInterface />
 						<Stack className="rounded-3 overflow-hidden">
 							<RouteMap key={activeTab} />
 						</Stack>

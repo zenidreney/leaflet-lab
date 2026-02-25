@@ -1,8 +1,8 @@
 import Stack from "react-bootstrap/Stack";
-import LocationForm from "../components/LocationForm";
+import LocationForm from "./LocationForm";
 import { useLocation } from "../hooks/useLocation";
 
-export default function InputInterface() {
+export default function RouteMapLocationForm() {
 	// console.log("loading: ", loading, "error: ", error)
 	const { distance, journeyDuration } = useLocation();
 

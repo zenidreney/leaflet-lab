@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Stack from "react-bootstrap/Stack";
 import { MapContainer, Polyline, TileLayer, useMap } from "react-leaflet";
 import { useLocation } from "../hooks/useLocation";
+import RouteMapLocationForm from "./RouteMapLocationForm";
 
 type CenterMapProps = {
 	long: string | null;
@@ -63,7 +64,7 @@ export default function UserMap() {
 					`https://router.project-osrm.org/route/v1/driving/${startLong},${startLat};${endLong},${endLat}?overview=full&geometries=geojson`,
 				);
 				const data = await res.json();
-				console.log("Route Data:", typeof data.routes[0].legs[0].duration);
+				// console.log("Route Data:", typeof data.routes[0].legs[0].duration);
 				const distanceInKm = Math.floor(data.routes[0].legs[0].distance / 1000);
 				setDistance(distanceInKm);
 	
@@ -111,6 +112,8 @@ export default function UserMap() {
 
 	return (
 		<Stack ref={mapRef}>
+						<RouteMapLocationForm />
+
 			{isRouteLoading ? <p>Route Loading...</p> : ""}
 			<MapContainer
 				center={[51.505, -0.09]}
