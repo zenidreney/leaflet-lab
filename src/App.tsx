@@ -1,9 +1,9 @@
+import { useState } from "react";
 import Stack from "react-bootstrap/Stack";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import RouteMap from "./components/RouteMap";
 import { LocationContextProvider } from "./context/LocationContext";
-import { useState } from "react";
 
 import "./App.css";
 import SingleMap from "./components/SingleMap";
@@ -18,7 +18,7 @@ function App() {
 				className="app-container mt-3 text-white px-3 pb-3 shadow-lg"
 			>
 				<Stack className="mt-2 align-items-center">
-					<h1>ZenidMap</h1>
+					<h1>Route Finder</h1>
 				</Stack>
 				<Tabs
 					id="zenidmap-tabs"
